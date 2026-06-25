@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seoul &amp; Busan — A Local's Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c2a33;
+    --paper: #eef4f6;
+    --paper-warm: #e0ebf0;
+    --moss: #2f6478;
+    --moss-light: #5b93a8;
+    --clay: #e8736b;
+    --clay-soft: #f0938c;
+    --line: #c2d4dc;
+    --mute: #6a7c85;
+    --sea: #2f7b8c;
+    --display: 'Fraunces', Georgia, serif;
+    --sans: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--clay); color: var(--paper); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(107,138,110,0.18), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 10% 90%, rgba(196,104,63,0.12), transparent 55%),
+      var(--paper);
+  }
+  .hero-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mute);
+  }
+  .hero-top .seq { color: var(--clay); font-weight: 600; }
+  .hero-mid { display: flex; flex-direction: column; justify-content: center; flex: 1; padding: 2rem 0; }
+  .hero h1 {
+    font-family: var(--display); font-weight: 300;
+    font-size: clamp(2.6rem, 9vw, 7.5rem); line-height: 0.94; letter-spacing: -0.02em;
+  }
+  .hero h1 em { font-style: italic; color: var(--moss); }
+  .hero h1 .clay { color: var(--clay); }
+  .hero-tagline {
+    margin-top: clamp(1.5rem, 3vw, 2.5rem); max-width: 36ch;
+    font-family: var(--display); font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+    font-style: italic; font-weight: 300; line-height: 1.4; color: var(--moss);
+  }
+  .hero-sub { margin-top: 1.2rem; max-width: 50ch; font-size: clamp(0.95rem, 1.6vw, 1.05rem); color: var(--mute); }
+  .hero-bottom {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap;
+    font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute);
+  }
+  .hero-bottom .chapters { display: flex; gap: 0.5rem 1rem; flex-wrap: wrap; max-width: 62ch; }
+  .hero-bottom .chapters span { white-space: nowrap; }
+  .hero-bottom .chapters .dot { color: var(--clay); }
+  .scroll-cue { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .scroll-cue .arrow { display: inline-block; animation: bob 2.2s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
+
+  /* ---------- TRIP STRIP ---------- */
+  .trip-strip {
+    max-width: 1180px; margin: 0 auto; padding: clamp(2.5rem,6vw,4rem) clamp(1.5rem,5vw,5rem) 0;
+    display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+    font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.06em; color: var(--moss);
+  }
+  .trip-strip .leg { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .trip-strip .city { font-weight: 600; color: var(--ink); }
+  .trip-strip .nights { color: var(--clay); font-weight: 600; }
+  .trip-strip .sep { color: var(--line); margin: 0 0.3rem; }
+
+  /* ---------- CHAPTER ---------- */
+  .chapter { padding: clamp(3rem,7vw,5.5rem) clamp(1.5rem,5vw,5rem) clamp(1.5rem,4vw,3rem); max-width: 1180px; margin: 0 auto; }
+  .chapter-head {
+    display: grid; grid-template-columns: auto 1fr; gap: clamp(1rem,3vw,2.5rem); align-items: start;
+    border-top: 1.5px solid var(--ink); padding-top: 1.4rem; margin-bottom: clamp(2rem,4vw,3.5rem);
+  }
+  .chapter-num { font-family: var(--display); font-size: clamp(2.2rem,6vw,4rem); font-weight: 300; line-height: 0.8; color: var(--clay); }
+  .chapter.sea .chapter-num { color: var(--sea); }
+  .chapter.sea .chapter-head { border-top-color: var(--sea); }
+  .chapter-titles .kicker {
+    font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--moss-light); display: block; margin-bottom: 0.5rem;
+  }
+  .chapter.sea .chapter-titles .kicker { color: var(--sea); }
+  .chapter-titles h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem,5vw,3.2rem); line-height: 1; letter-spacing: -0.01em; }
+  .chapter-titles h2 .kor { display: block; font-size: 0.46em; color: var(--mute); font-style: italic; margin-top: 0.45rem; font-weight: 300; }
+  .chapter-intro { grid-column: 2; margin-top: 1.2rem; max-width: 56ch; font-size: clamp(1rem,1.8vw,1.12rem); color: var(--moss); }
+  @media (max-width: 640px) {
+    .chapter-head { grid-template-columns: 1fr; gap: 0.6rem; }
+    .chapter-intro { grid-column: 1; }
+  }
+
+  /* ---------- HOOD CARDS ---------- */
+  .hoods { display: grid; gap: clamp(1.2rem,2.5vw,1.8rem); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .hood {
+    background: var(--paper-warm); border: 1px solid var(--line); border-radius: 2px;
+    padding: clamp(1.4rem,2.5vw,2rem); display: flex; flex-direction: column;
+    transition: transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s, border-color .4s; position: relative; overflow: hidden;
+  }
+  .hood::before {
+    content:""; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--clay);
+    transform:scaleX(0); transform-origin:left; transition:transform .5s cubic-bezier(.2,.7,.3,1);
+  }
+  .chapter.sea .hood::before { background: var(--sea); }
+  .hood:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -18px rgba(26,31,28,.4); border-color: var(--moss-light); }
+  .hood:hover::before { transform: scaleX(1); }
+  .hood.wide { grid-column: 1 / -1; }
+  .hood-name { font-family: var(--display); font-size: clamp(1.4rem,2.6vw,1.85rem); font-weight: 400; line-height: 1.05; }
+  .hood-name .en {
+    display: block; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--moss-light); font-weight: 500; margin-top: 0.4rem;
+  }
+  .hood-mood { margin-top: 0.9rem; font-size: 0.98rem; color: var(--ink); line-height: 1.55; }
+  .hood-mood + .hood-mood { margin-top: 0.6rem; }
+
+  .hood-do { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed var(--line); }
+  .hood-do .label {
+    font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--clay); font-weight: 600; display: block; margin-bottom: 0.5rem;
+  }
+  .hood-do p { font-size: 0.92rem; color: var(--moss); }
+
+  /* instead-of callout */
+  .instead {
+    margin-top: 1rem; padding: 0.75rem 0.9rem; background: rgba(196,104,63,0.08);
+    border-left: 2px solid var(--clay); font-size: 0.88rem; color: var(--moss);
+  }
+  .instead strong { color: var(--clay); font-weight: 600; }
+
+  /* fun-fact box inside palace card */
+  .facts { margin-top: 1rem; display: grid; gap: 0.75rem; }
+  .fact {
+    padding: 0.8rem 0.95rem; background: rgba(47,100,120,0.06);
+    border-left: 2px solid var(--moss-light); border-radius: 0;
+  }
+  .fact h4 {
+    font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.04em;
+    color: var(--moss); font-weight: 600; margin-bottom: 0.3rem;
+  }
+  .fact h4 .yr { color: var(--clay); font-weight: 600; }
+  .fact p { font-size: 0.88rem; color: var(--ink); line-height: 1.5; }
+  .fact .meta { display: block; margin-top: 0.35rem; font-size: 0.8rem; color: var(--mute); font-style: italic; }
+
+  /* mini timeline inside palace facts */
+  .tl { margin: 0.55rem 0 0.2rem; display: grid; gap: 0.3rem; }
+  .tl-row { display: grid; grid-template-columns: 92px 1fr; gap: 0.7rem; align-items: baseline; }
+  .tl-row .yr { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; color: var(--clay); white-space: nowrap; }
+  .tl-row .ev { font-size: 0.85rem; color: var(--ink); line-height: 1.4; }
+  @media (max-width: 520px) { .tl-row { grid-template-columns: 76px 1fr; gap: 0.5rem; } }
+
+  /* river-park picker grid */
+  .parks { margin-top: 1.1rem; display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .park {
+    padding: 0.85rem 0.95rem; background: var(--paper); border: 1px solid var(--line);
+    border-radius: 2px; transition: border-color .3s, transform .3s;
+  }
+  .park:hover { border-color: var(--moss-light); transform: translateY(-2px); }
+  .park h5 {
+    font-family: var(--sans); font-size: 0.82rem; font-weight: 600; color: var(--ink);
+    margin-bottom: 0.25rem; display: flex; align-items: baseline; gap: 0.35rem;
+  }
+  .park h5 .kr { font-size: 0.72rem; color: var(--mute); font-weight: 400; }
+  .park p { font-size: 0.82rem; color: var(--moss); line-height: 1.45; }
+  .park.pick { border-color: var(--clay); }
+  .park.pick h5 { color: var(--clay); }
+
+  /* Yejin's tip */
+  .tip {
+    margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line);
+    font-style: italic; font-family: var(--display); font-size: 0.98rem; color: var(--moss); line-height: 1.5;
+  }
+  .tip .tag {
+    display: inline-block; font-family: var(--sans); font-style: normal; font-size: 0.64rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--clay); font-weight: 600; margin-bottom: 0.4rem;
+  }
+
+  /* places / maps */
+  .places { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px dashed var(--line); }
+  .places .label {
+    font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--moss-light); font-weight: 600; display: block; margin-bottom: 0.5rem;
+  }
+  .place-link {
+    display: flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0; font-size: 0.9rem; color: var(--ink);
+    text-decoration: none; transition: color .25s, padding-left .25s; border-bottom: 1px solid transparent;
+  }
+  .place-link:hover { color: var(--clay); padding-left: 0.3rem; }
+  .place-link .pin { flex-shrink: 0; color: var(--clay); }
+  .place-link .nm { flex: 1; }
+  .place-link .note { color: var(--mute); font-size: 0.8rem; font-style: italic; }
+  .place-link .arrow-out { opacity: 0; transition: opacity .25s, transform .25s; color: var(--moss-light); }
+  .place-link:hover .arrow-out { opacity: 1; transform: translateX(2px); }
+
+  /* logistics list (General) */
+  .logi { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .logi-item { background: var(--paper-warm); border: 1px solid var(--line); border-radius: 2px; padding: 1.3rem 1.4rem; }
+  .logi-item h4 { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.6rem; }
+  .logi-item p { font-size: 0.9rem; color: var(--ink); }
+  .logi-item p + p { margin-top: 0.5rem; }
+  .logi-item a { color: var(--moss); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* day-trip / appendix smaller cards */
+  .mini { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+
+  /* ---------- DIVIDER ---------- */
+  .divider {
+    max-width: 1180px; margin: clamp(2rem,5vw,4rem) auto 0; padding: 0 clamp(1.5rem,5vw,5rem);
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .divider::before, .divider::after { content:""; flex:1; height:1.5px; background: var(--ink); }
+  .divider span { font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); }
+
+  /* ---------- OUTRO ---------- */
+  .outro {
+    padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,5rem); text-align: center;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(61,82,64,0.12), transparent 60%), var(--paper);
+    border-top: 1.5px solid var(--ink); margin-top: clamp(3rem,7vw,5rem);
+  }
+  .outro .mark { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); margin-bottom: 1.5rem; }
+  .outro h3 { font-family: var(--display); font-weight: 300; font-style: italic; font-size: clamp(1.6rem,4.5vw,3rem); line-height: 1.2; max-width: 20ch; margin: 0 auto; }
+  .outro h3 .clay { color: var(--clay); font-style: normal; }
+  .outro .credit { margin-top: 2.5rem; font-family: var(--sans); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+  :focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+
+  /* ---------- SEOUL MAP ---------- */
+  .seoul-map { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .seoul-map svg { width: 100%; height: auto; display: block; }
+  .seoul-map .river { fill: none; stroke: var(--moss-light); stroke-width: 26; opacity: 0.28; stroke-linecap: round; }
+  .seoul-map .river-line { fill: none; stroke: var(--moss); stroke-width: 1.2; opacity: 0.4; stroke-dasharray: 3 5; stroke-linecap: round; }
+  .seoul-map .river-label { fill: var(--moss-light); font-family: var(--display); font-style: italic; font-size: 15px; opacity: 0.75; }
+  .seoul-map .hood-dot { fill: var(--clay); }
+  .seoul-map .hood-dot-sm { fill: var(--moss-light); }
+  .seoul-map .hood-label { fill: var(--ink); font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; }
+  .seoul-map .hood-en { fill: var(--mute); font-family: var(--sans); font-size: 10px; letter-spacing: 0.04em; }
+  .seoul-map .zone-label { fill: var(--moss-light); font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.65; }
+  .seoul-map .compass { fill: var(--mute); font-family: var(--sans); font-size: 10px; letter-spacing: 0.16em; opacity: 0.6; }
+  @media (max-width: 600px) {
+    .seoul-map .hood-label { font-size: 15px; }
+    .seoul-map .hood-en { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-top">
+      <span>10 Days · Summer</span>
+      <span class="seq">A Local's Guide</span>
+    </div>
+    <div class="hero-mid">
+      <h1>Ten Days<br>in Korea<span class="clay">.</span></h1>
+      <p class="hero-sub">A local's notes for your trip — where Koreans actually go, what to skip, and the cafés, BBQ and river spots worth your time. Ten days, by neighbourhood.</p>
+    </div>
+    <div class="hero-bottom">
+      <div class="chapters">
+        <span><span class="dot">00</span> Before You Go</span>
+        <span><span class="dot">01</span> Meet Seoul</span>
+        <span><span class="dot">02</span> Heritage</span>
+        <span><span class="dot">03</span> Creative</span>
+        <span><span class="dot">04</span> Uptown</span>
+        <span><span class="dot">05</span> Eclectic</span>
+        <span><span class="dot">06</span> River</span>
+        <span><span class="dot">07</span> Busan</span>
+      </div>
+      <span class="scroll-cue">Scroll <span class="arrow">↓</span></span>
+    </div>
+  </header>
+
+  <!-- TRIP STRIP -->
+  <div class="trip-strip reveal">
+    <span class="leg"><span class="city">Seoul</span> <span class="nights">7 nights</span></span>
+    <span class="sep">→</span>
+    <span class="leg"><span class="city">Busan</span> <span class="nights">3 nights</span></span>
+    <span class="sep">·</span>
+    <span class="leg">Day trips: DMZ, Jeonju</span>
+    <span class="sep">·</span>
+    <span class="leg">Appendix: Gyeongju &amp; Andong</span>
+  </div>
+
+  <!-- 00 BEFORE YOU GO -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">00</div>
+      <div class="chapter-titles">
+        <span class="kicker">The practical bits</span>
+        <h2>Before You Go<span class="kor">입국·교통·앱·결제 — 도착 전에 알아둘 것</span></h2>
+      </div>
+      <p class="chapter-intro">Boring but essential. Sort these before you land and the rest of the trip runs itself.</p>
+    </div>
+
+    <div class="logi">
+      <div class="logi-item reveal">
+        <h4>Arrival</h4>
+        <p>Complete the <strong>Q-CODE</strong> online before landing (health declaration, free). Do it 24–72h before the flight.</p>
+        <p>From Incheon (ICN) to central Seoul: AREX express (~43 min, ~9,500 KRW) or the cheaper all-stop.</p>
+      </div>
+      <div class="logi-item reveal">
+        <h4>Getting Around</h4>
+        <p>Seoul → Busan: KTX high-speed train, ~2.5h. Bookable about 1 month ahead on letskorail.com or the Korail Talk app.</p>
+        <p>A <strong>Korail Pass</strong> (3 or 5 days) only pays off if you're doing the full appendix loop — for Seoul+Busan, single tickets are simpler.</p>
+      </div>
+      <div class="logi-item reveal">
+        <h4>Payments / T-money</h4>
+        <p>Card and phone pay work almost everywhere — you'll barely touch cash. The one catch: <strong>topping up a T-money card is cash only.</strong></p>
+        <p>Grab a <strong>T-money card</strong> at any CU, GS25 or 7-Eleven (2,500 KRW + top-up) and load it with cash there. Works on metro, bus and taxi. Keep a little cash for top-ups and traditional markets; "Global" ATMs at 7-Eleven if you run out.</p>
+      </div>
+      <div class="logi-item reveal">
+        <h4>Essential Apps</h4>
+        <p><strong>Naver Map / Kakao Map</strong> — Google Maps barely works here. You can book restaurants right inside Naver Map.</p>
+        <p><strong>Catch Table / Tabling</strong> for the good restaurants (they always have long lines). <strong>Kakao Map</strong> for reliable reviews.</p>
+        <p><strong>KakaoTaxi</strong> (Uber equivalent), <strong>Korail Talk</strong> (trains).</p>
+      </div>
+      <div class="logi-item reveal">
+        <h4>Delivery magic</h4>
+        <p><strong>Baemin / Coupang Eats</strong> — you can literally get food delivered anywhere, 24h. At 3am, on a bridge, in the middle of a park. Any food, any drinks.</p>
+      </div>
+      <div class="logi-item reveal">
+        <h4>Electricity</h4>
+        <p>220V, Type C/F plugs — same as Italy. No adapter needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 MEET SEOUL -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">01</div>
+      <div class="chapter-titles">
+        <span class="kicker">How to read this city</span>
+        <h2>Meet Seoul<span class="kor">서울을 동네로 읽는 법</span></h2>
+      </div>
+      <p class="chapter-intro">Seoul isn't really a checklist of landmarks — it's a collection of neighbourhoods, each with its own mood. The same city feels completely different depending on which one you're standing in. So this guide is built by lifestyle, not by district: where to go for design and trends, for old hanok streets, for the river, for a quiet international afternoon.</p>
+    </div>
+
+    <div class="seoul-map reveal" role="img" aria-label="A simplified map of Seoul's neighbourhoods, split by the Han River into north and south.">
+      <svg viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg">
+        <!-- Han River: real-ish shape — enters NW, dips low at centre (Yeouido/Nodeul), rises to the E -->
+        <path class="river" d="M -20 200 C 160 250, 230 330, 360 365 S 560 410, 660 360 S 850 270, 1020 250" />
+        <path class="river-line" d="M -20 200 C 160 250, 230 330, 360 365 S 560 410, 660 360 S 850 270, 1020 250" />
+        <text class="river-label" x="150" y="232" transform="rotate(12 150 232)">Han River 한강</text>
+
+        <!-- compass -->
+        <text class="compass" x="940" y="40">N ↑</text>
+
+        <!-- zone labels -->
+        <text class="zone-label" x="70" y="70">North of the river</text>
+        <text class="zone-label" x="700" y="500">South of the river</text>
+
+        <!-- ===== NORTH ===== -->
+        <!-- Hongdae / Yeonnam / Hapjeong (west) -->
+        <circle class="hood-dot" cx="180" cy="170" r="5"/>
+        <text class="hood-label" x="192" y="168">Hongdae · Yeonnam</text>
+        <text class="hood-en" x="192" y="183">Creative · west</text>
+
+        <!-- Seochon / Bukchon / Ikseon (centre-north, palaces) -->
+        <circle class="hood-dot" cx="450" cy="125" r="5"/>
+        <text class="hood-label" x="462" y="123">Seochon · Bukchon</text>
+        <text class="hood-en" x="462" y="138">Heritage &amp; Design</text>
+
+        <!-- Euljiro / Jongno (centre) -->
+        <circle class="hood-dot" cx="480" cy="200" r="5"/>
+        <text class="hood-label" x="492" y="198">Euljiro · Jongno</text>
+        <text class="hood-en" x="492" y="213">Creative · old downtown</text>
+
+        <!-- Namsan (centre) -->
+        <circle class="hood-dot-sm" cx="500" cy="265" r="4"/>
+        <text class="hood-label" x="512" y="263">Namsan</text>
+
+        <!-- Hannam / Itaewon / HBC / Samgakji — Yongsan cluster (centre, just N of river) -->
+        <circle class="hood-dot" cx="560" cy="310" r="5"/>
+        <text class="hood-label" x="572" y="308">Hannam · Itaewon</text>
+        <text class="hood-en" x="572" y="323">Eclectic · Yongsan</text>
+
+        <!-- Seongsu / Seoul Forest (east, where river bends up) -->
+        <circle class="hood-dot" cx="760" cy="250" r="5"/>
+        <text class="hood-label" x="772" y="248">Seongsu · Seoul Forest</text>
+        <text class="hood-en" x="772" y="263">Creative · east</text>
+
+        <!-- ===== ON THE RIVER ===== -->
+        <!-- Yeouido (west, on the low dip) -->
+        <circle class="hood-dot-sm" cx="300" cy="355" r="4"/>
+        <text class="hood-label" x="312" y="353">Yeouido</text>
+
+        <!-- Nodeul (centre, lowest point) -->
+        <circle class="hood-dot-sm" cx="470" cy="383" r="4"/>
+        <text class="hood-label" x="482" y="381">Nodeul Is.</text>
+
+        <!-- Banpo (centre-east, on the river) -->
+        <circle class="hood-dot-sm" cx="640" cy="378" r="4"/>
+        <text class="hood-label" x="652" y="376">Banpo</text>
+
+        <!-- ===== SOUTH ===== -->
+        <!-- Apgujeong / Sinsa / COEX (south of river, centre-east) -->
+        <circle class="hood-dot" cx="660" cy="440" r="5"/>
+        <text class="hood-label" x="672" y="438">Apgujeong · COEX</text>
+        <text class="hood-en" x="672" y="453">Uptown · Gangnam</text>
+      </svg>
+    </div>
+
+    <div class="hoods">
+      <article class="hood reveal">
+        <h3 class="hood-name">Go by neighbourhood<span class="en">동네로 보기</span></h3>
+        <p class="hood-mood">Each chapter ahead is a different side of Seoul. You don't need to do them all — pick the moods that fit your friend and string those days together.</p>
+        <div class="hood-do">
+          <span class="label">The chapters</span>
+          <p><strong>Heritage &amp; Design</strong> — palaces, hanok, the best food day.<br>
+          <strong>Creative</strong> — Seongsu, Euljiro, Hongdae for trends &amp; cafés.<br>
+          <strong>Uptown</strong> — Apgujeong &amp; COEX, the polished Gangnam side.<br>
+          <strong>Eclectic</strong> — Hannam, Itaewon &amp; Yongsan, global and mixed.<br>
+          <strong>River</strong> — the Han, decoded.</p>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Ease into day one<span class="en">첫날은 가볍게</span></h3>
+        <p class="hood-mood">You land around midday, drop your bags, and you'll be more tired than you think. Don't over-plan the first day — pick one neighbourhood, eat something great, catch a sunset, and let the jet lag settle.</p>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          Day one is for arriving, not conquering. Save the big walking days for when you've slept.
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">If you remember one thing<span class="en">딱 하나만 기억하면</span></h3>
+        <p class="hood-mood">When something is famous but feels like it's "for tourists," there's almost always a better local version one neighbourhood over. I'll flag those as we go — the <strong>"go here instead"</strong> notes are where the real Seoul is.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 02 HERITAGE & DESIGN -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">02</div>
+      <div class="chapter-titles">
+        <span class="kicker">My favourite day</span>
+        <h2>Heritage &amp; Design<span class="kor">전통과 현대가 한 골목에 — 내가 제일 좋아하는 동네</span></h2>
+      </div>
+      <p class="chapter-intro">My favourite area, and the heart of old Seoul — all in Jongno-gu. Palaces and hanok alleys, with trendy cafés, galleries and great food tucked between the old buildings. The neighbourhoods sit around Gyeongbokgung Palace, so you can string them together on foot. One day honestly isn't enough.</p>
+    </div>
+
+    <div class="hoods">
+      <article class="hood wide reveal">
+        <h3 class="hood-name">The palaces<span class="en">궁궐 · 도심의 중심</span></h3>
+        <p class="hood-mood">Seoul has five grand Joseon-dynasty palaces, but two do the job: <strong>Gyeongbokgung</strong>, the big formal one, and <strong>Changdeokgung</strong>, the quieter one with the famous garden. They're a 15-minute walk apart, with the hanok neighbourhoods in between.</p>
+
+        <div class="facts">
+          <div class="fact">
+            <h4>Gyeongbokgung <span class="yr">· the big one</span></h4>
+            <p>The first and largest of the five palaces. King Sejong invented Hangul, the Korean alphabet, here.</p>
+            <div class="tl">
+              <div class="tl-row"><span class="yr">1395</span><span class="ev">Built as the Joseon dynasty's main palace</span></div>
+              <div class="tl-row"><span class="yr">1592</span><span class="ev">Burned down in the Japanese invasion; left in ruins ~270 years</span></div>
+              <div class="tl-row"><span class="yr">1910–45</span><span class="ev">Colonial rule — over 90% of its buildings demolished</span></div>
+              <div class="tl-row"><span class="yr">to 2045</span><span class="ev">Slowly being rebuilt from historical records</span></div>
+            </div>
+            <span class="meta">Do: Changing of the Guard at the main gate (~10am &amp; 2pm). Free entry in hanbok.</span>
+          </div>
+          <div class="fact">
+            <h4>Changdeokgung <span class="yr">· UNESCO · the garden one</span></h4>
+            <p>The best-preserved palace, built to follow the natural hills rather than impose symmetry. Its "Secret Garden" was the royals' private retreat — about 60% of the grounds.</p>
+            <div class="tl">
+              <div class="tl-row"><span class="yr">1405</span><span class="ev">Built as the "eastern palace"</span></div>
+              <div class="tl-row"><span class="yr">1997</span><span class="ev">Named a UNESCO World Heritage Site</span></div>
+            </div>
+            <span class="meta">Do: book the Secret Garden tour ahead — limited tickets, English tours sell out (best in autumn).</span>
+          </div>
+        </div>
+
+        <div class="hood-do">
+          <span class="label">Yejin's take</span>
+          <p>Pick one big palace (Gyeongbokgung) and one garden (Changdeokgung), then spend the rest of the day in the neighbourhoods around them rather than ticking off all five. Palaces are closed Mondays (Changdeokgung) / Tuesdays (Gyeongbokgung), so check before you go.</p>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Seochon<span class="en">서촌</span></h3>
+        <p class="hood-mood">West of Gyeongbokgung. Quiet hanok lanes with bookshops, small galleries and calm cafés — more local and low-key than Bukchon.</p>
+        <div class="places">
+          <span class="label">Cafés — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/eNzQNtS9j542Z6oP6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Intelligentsia Coffee, Seochon</span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/3qECk7UL3eFvYwea6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Staff Picks, Seochon</span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="#" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Manufact Coffee, Seochon <span class="note">(link coming)</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="#" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">apt.333 <span class="note">(link coming — check name)</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Bukchon · Samcheong<span class="en">북촌 · 삼청동</span></h3>
+        <p class="hood-mood">East of the palace. The postcard hanok village, with the Samcheong-dong café and gallery street running off it. Busier and prettier — come early for the quiet lanes.</p>
+        <div class="places">
+          <span class="label">Cafés &amp; tea — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/bxdu4YYhEs8Hb2Kq8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Osulloc Tea House, Bukchon <span class="note">— Korean matcha, my favourite</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/M4GDJe3ats9EH1zN8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Le Labo, Bukchon hanok <span class="note">— fragrance flagship in a hanok with a café, beautiful space &amp; good coffee</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/oXngfi9wAtJBmJMY8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Arari, Bukchon <span class="note">— tea room</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/nnbZukFPyPiCtk876" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Samcheong Bingsu <span class="note">— Korean shaved ice</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/taifSLiQvA9UPjXm7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Heon Cha Haus, Bukchon <span class="note">— tea house</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Ikseon-dong · Insadong<span class="en">익선동 · 인사동</span></h3>
+        <p class="hood-mood">Narrow hanok lanes brought back to life as restaurants and bars (Ikseon), next to the traditional crafts and tea of Insadong. The best stretch for dinner and drinks. Don't miss <strong>Jogyesa Temple</strong> nearby — I love it.</p>
+        <div class="places">
+          <span class="label">BBQ — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/yD8v3FD1ZUs1doWJ9" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Kim Jin Mok-sam <span class="note">— my favourite!!</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/d8PRh3Xrf7F8BAv18" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Ikseon-dong Mokjang (main) <span class="note">— BBQ alley, neighbours are fine too if full</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/L5w5ej3nDHcfFBiU6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Jongsamyuk <span class="note">— outdoor</span></span><span class="arrow-out">↗</span></a>
+        </div>
+        <div class="places">
+          <span class="label">Modern Korean &amp; bars — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/59YWr7sBiW1m9GUe6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Dochwi Hanok Restaurant <span class="note">— modern Korean, lovely room, book ahead!</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/2E7xxigEUmhNuZzt7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Uri Suljip Daramjwi <span class="note">— modern Korean-liquor bar on Seosunla-gil</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/KWJFFH6jg8KpMubq7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Saetakso <span class="note">— Korean gastro-pub in a hanok</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/hTmbFbeVk4JC7ai67" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Waok <span class="note">— fusion cocktail bar with a traditional twist</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/yeU7khdQx3qbJfxVA" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Bar Cham <span class="note">— Korean-inspired cocktails, World's 50 Best Bars, great mood</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Gwanghwamun · Cheonggyecheon<span class="en">광화문 · 청계천</span></h3>
+        <p class="hood-mood">The civic centre — the big plaza, the palace gate, and the Cheonggyecheon stream cutting through downtown.</p>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          On a Monday, walk the Cheonggyecheon stream up to Gwanghwamun — you'll see all the office workers out and about. It's a very Seoul scene.
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Up the hill<span class="en">인왕산 · 북악스카이웨이</span></h3>
+        <p class="hood-mood"><strong>Inwangsan hike</strong> — right behind Seochon, an hour up the old city wall and the whole city opens up below you. One of the easiest "Mountain Seoul" hits, straight from the neighbourhood.</p>
+        <p class="hood-mood"><strong>Bugak Skyway drive</strong> — if hiking's not your thing, the road that winds over Bugaksan gives you the same city-from-above view from the car, with lookout stops along the way. A lovely one at sunset.</p>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Galleries<span class="en">갤러리</span></h3>
+        <p class="hood-mood">This area is dense with galleries — from big institutions to tiny hanok spaces. Start with the <strong>MMCA</strong> (National Museum of Modern &amp; Contemporary Art), right by the palaces.</p>
+        <div class="tip">
+          <span class="tag">Note from me</span>
+          More gallery picks coming — still putting the list together.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 03 CREATIVE SEOUL -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">03</div>
+      <div class="chapter-titles">
+        <span class="kicker">The trendy side</span>
+        <h2>Creative Seoul<span class="kor">트렌디한 서울 — 패션·디자인·카페가 매번 바뀌는 곳</span></h2>
+      </div>
+      <p class="chapter-intro">If someone asked me where to feel modern Seoul, this would be my answer. Fashion, design, pop-ups, cafés, galleries and trends that change every time I visit. The fun isn't a checklist — it's wandering and seeing what you find.</p>
+    </div>
+
+    <div class="hoods">
+      <article class="hood reveal">
+        <h3 class="hood-name">Seongsu<span class="en">성수</span></h3>
+        <p class="hood-mood">If you like fashion, beauty, cafés or design, plan to spend much longer here than you expect. It's bigger than it looks — flagship stores, pop-ups and brand experiences, with new exhibitions every season. Huge Olive Young, Tamburins, Matin Kim, Gentle Monster…</p>
+        <p class="hood-mood">If you just want the main strip, start from <strong>Dior Seongsu</strong> and walk Yeonmujang-gil (연무장길) — but don't stay on the main street. The best cafés hide in the smaller alleys.</p>
+        <div class="instead">
+          Grab a coffee and walk over to <strong>Seoul Forest</strong> — locals reading, picnicking, walking dogs on the grass. The brand flagships here are destinations in themselves, half store, half art installation — and if your friend likes K-pop, SM Entertainment's HQ and store are right here.
+        </div>
+        <div class="places">
+          <span class="label">Brand flagships — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/DBuEBsjkn21oJQd38" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">House of Nowhere, Seoul <span class="note">— Gentle Monster's futuristic flagship</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/gYwf8MsD28iDqrEq6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Dior Seongsu <span class="note">— started as a pop-up, became so iconic it stayed</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/8qiT5z82xVAMzqiB7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">KWANGYA @ SEOUL <span class="note">— SM Entertainment HQ &amp; flagship store, Korea's first &amp; biggest K-pop label</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood wide reveal">
+        <h3 class="hood-name">Euljiro<span class="en">을지로</span></h3>
+        <p class="hood-mood">One of my favourite neighbourhoods. It used to be full of small manufacturing — printing shops, electronics and instrument arcades, metal workshops. As those spaces got reused as bars and cafés, it slowly turned hip, and now old-timers' hangouts and young crowds mix in the same alleys to make a really particular atmosphere. It's a bit like the cyberpunk version of Korea that foreigners imagine — old-school and trendy, side by side.</p>
+        <p class="hood-mood">Izakayas, wine bars, cocktail bars, old-school <em>nopo</em> diners — it's all jumbled together, so you can do whatever you're in the mood for. Duck into a no-frills nopo for cheap draft beer, or hunt down a hidden cocktail bar. It completely changes character at night.</p>
+        <div class="hood-do">
+          <span class="label">Getting there</span>
+          <p>Euljiro 3-ga station, or walk from Jonggak along the Cheonggyecheon stream. <strong>Heads up:</strong> the good places need reservations — the best ones are booked out weeks, even a month, ahead.</p>
+        </div>
+        <div class="instead">
+          If someone asked me — Myeongdong or Euljiro for the evening? — I'd choose <strong>Euljiro almost every time.</strong>
+        </div>
+        <div class="places">
+          <span class="label">Bars &amp; drinks — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/bgWVmuZGaTEFKmxv8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Ace Four Club <span class="note">— "drink here or cry later"</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/PPPkK6oGW8kuxdWf8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Bottler</span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="#" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Cheonggiwa Town <span class="note">(link coming)</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="#" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Nopo pick <span class="note">— old-school spot (link coming)</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Hongdae &amp; Yeonnam<span class="en">홍대 · 연남</span></h3>
+        <p class="hood-mood">Hongdae is <em>huge</em> — don't expect one single neighbourhood, you have to find the right pocket. I'd walk towards Sangsu or into Yeonnam-dong rather than staying around Hongik Univ. Station.</p>
+        <p class="hood-mood"><strong>Yeonnam</strong> has a much slower feel — chill, small, independent shops and quieter streets.</p>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          Don't try to hit every famous café you saw on Instagram. Half the fun is walking around and stumbling onto places you weren't looking for.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 UPTOWN SEOUL -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">04</div>
+      <div class="chapter-titles">
+        <span class="kicker">Polished &amp; grown-up · Gangnam</span>
+        <h2>Uptown Seoul<span class="kor">강남 — 럭셔리하고 세련된 결</span></h2>
+      </div>
+      <p class="chapter-intro">Gangnam gets recommended a lot, but the area around Gangnam Station itself is just huge commercial and office blocks. The good parts are uptown: the luxury, polished, grown-up side of the city.</p>
+    </div>
+
+    <div class="hoods">
+      <article class="hood reveal">
+        <h3 class="hood-name">Apgujeong · Sinsa<span class="en">압구정 · 신사</span></h3>
+        <p class="hood-mood">Skip Gangnam Station. The good part of Gangnam is up here — still Gangnam, but the luxury, trendy side. The spine of it is <strong>Dosan-daero</strong> (도산대로), the boulevard running through Apgujeong and Sinsa, lined with flagship boutiques, concept stores and some of the city's best high-end dining and cafés.</p>
+        <div class="instead">
+          Compared to Seongsu, it's more <strong>luxurious and a bit more grown-up</strong>. Seongsu for youth and energy, this for polish.
+        </div>
+        <div class="hood-do">
+          <span class="label">The three streets</span>
+          <p><strong>Dosan-daero</strong> — the main axis: luxury flagships, designer concept stores, high-end restaurants.<br>
+          <strong>Garosu-gil</strong> — the tree-lined shopping street: fashion and cafés.<br>
+          <strong>Apgujeong Rodeo</strong> — the trendier pocket. A spa treatment too, if you're in the mood.</p>
+        </div>
+        <div class="places">
+          <span class="label">Landmark to orient by — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/XqL9nCAy5Askortn7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">HAUS NOWHERE Dosan <span class="note">— worth a look itself, and a handy landmark — the hottest spots cluster around here</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Gangnam Station &amp; COEX<span class="en">강남역 · 코엑스</span></h3>
+        <p class="hood-mood">When people say "Gangnam," they often mean the area around <strong>Gangnam Station</strong> — but that's really just an express-bus hub and office district. Lots of people, not much for a traveller to see. Honestly, you can skip it.</p>
+        <div class="instead">
+          <strong>COEX</strong> is the part that's worth it — a huge mall complex with the photogenic Starfield Library (Byeolmadang), an aquarium and SM Town. And not far away is <strong>Lotte World Tower</strong> in Jamsil — Korea's tallest building, with an observation deck and a theme park at its base.
+        </div>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          On a hot summer day, this is a good indoor escape — wander the Starfield Library and grab a coffee at the % Arabica inside.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 05 ECLECTIC SEOUL -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">05</div>
+      <div class="chapter-titles">
+        <span class="kicker">Where the world mixes in · Yongsan</span>
+        <h2>Eclectic Seoul<span class="kor">용산 — 한남·해방촌·이태원·삼각지</span></h2>
+      </div>
+      <p class="chapter-intro">If one word has to cover Yongsan, "eclectic" is it. This is where you'll find Seoul's most expensive apartments and the National Museum of Korea; its most global neighbourhood and its most chaotic nightlife; quiet hilltop bars and the trendiest dining streets — all packed into one district by the river. These pockets sit close together, so they string into one easy day (and a long night).</p>
+    </div>
+
+    <div class="hoods">
+      <article class="hood wide reveal">
+        <h3 class="hood-name">Hannam<span class="en">한남동</span></h3>
+        <p class="hood-mood">Toward the river it's expensive apartments and embassies; around the station there's a proper fashion street. You'll find the Korean labels the stylish crowd actually wears — Ohlssoo, RECTO, Le September, ron ron and plenty more — plus fun concept stores. Seriously stylish crowd, you might even spot a celebrity. Try not to feel underdressed.</p>
+        <p class="hood-mood">The <strong>Lemaire</strong> flagship is worth a look too — the Paris label that Koreans and Japanese love, and (apart from Paris) its only flagships are said to be here and in Tokyo. A very cool space. The whole area is polished and effortlessly stylish — use the <strong>Hyundai Card Music/Design Library</strong> as a landmark, wander the back alleys for great little restaurants, and take it slow.</p>
+        <div class="places">
+          <span class="label">Spots — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/3qmtd5PXjWuN8iat6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Lemaire Hannam flagship <span class="note">— Paris label, a flagship only here &amp; Tokyo</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/oDPGSCddkHZPhdbs8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Gourmet 494, Naine One Hannam <span class="note">— food hall, a cool indoor break on a hot day</span></span><span class="arrow-out">↗</span></a>
+        </div>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          The real fun here is treasure-hunting the back alleys — there's so much tucked away. (Just pace yourself, it's summer.) If the heat gets to you, duck into the Gourmet 494 food hall at Naine One Hannam for a bite.
+        </div>
+      </article>
+
+      <article class="hood wide reveal">
+        <h3 class="hood-name">Itaewon &amp; Haebangchon<span class="en">이태원 · 해방촌</span></h3>
+        <p class="hood-mood">One of the most unusual areas in Korea. A US army base used to sit here, so it grew up global — and along with Hongdae, it's where the most foreigners live in Seoul. Naturally a club culture grew with it, so this is house- and techno-club territory.</p>
+        <p class="hood-mood">At night it gets genuinely chaotic, but it's also where you'll find the city's real diversity (lots of gay clubs), and tucked inside it are small, niche spaces that are completely your own. It's a "you see as much as you know" kind of place — the more you understand it, the better it gets.</p>
+        <div class="hood-do">
+          <span class="label">How I'd do it</span>
+          <p>This is where I've spent a lot of nights out for house music — there are loads of clubs, and the fun is in the back alleys, not the main strip. Honestly the <strong>main Itaewon drag is too hectic</strong> — I'd soak up the atmosphere, then slip off toward Hannam or up to Haebangchon.</p>
+        </div>
+        <div class="places">
+          <span class="label">My picks — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/bapjWijUqhLNAPEG8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">teller <span class="note">— my favourite house-music venue</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/ir4mSh1cMwCUZRBZ9" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">kamar <span class="note">— a friend's place, delicious, friendly &amp; comfy</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood wide reveal">
+        <h3 class="hood-name">Samgakji<span class="en">삼각지</span></h3>
+        <p class="hood-mood">Grown up around Yongsan KTX station, this pocket really took off once big names moved in — Amorepacific (one of the giants behind K-beauty) built its HQ here, and HYBE (BTS's label) too. With them came a wave of small independent spaces.</p>
+        <p class="hood-mood">It's now a fun mix of old-school diners and hip new spots — brunch places, natural-wine bars, tiny independent shops, including spots run by winners of that Netflix cooking-competition show. Another "you see as much as you know" pocket. A natural dinner stop after a Han River sunset nearby.</p>
+        <div class="places">
+          <span class="label">Eat &amp; drink — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/JxbxwuktxBb517LW9" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Seogam Raw Salt-Grilled Pork <span class="note">— salt-grilled BBQ, a must!</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/44P9wNA8XjahkqjF9" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Kim Suk-seong, Sinyongsan</span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/8hM7PcHtVKyz8erZA" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Danse <span class="note">— brunch &amp; natural-wine bar</span></span><span class="arrow-out">↗</span></a>
+        </div>
+        <div class="places">
+          <span class="label">Landmark — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/7G9ovy2NtSh8NhMa6" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Amorepacific HQ <span class="note">— striking building, open public spaces inside</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">National Museum of Korea<span class="en">국립중앙박물관</span></h3>
+        <p class="hood-mood">Also in Yongsan, and worth the trip — a huge, beautifully laid-out museum tracing Korean history from prehistory to the Joseon dynasty. The grounds and reflecting pond are lovely too, and entry to the permanent galleries is free.</p>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          A perfect hot-day option — it's big, cool and indoors, easily a half-day.
+        </div>
+        <div class="places">
+          <span class="label">Spot — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/g5Z5phF5XSiPxV1M8" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">National Museum of Korea</span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 06 RIVER SEOUL -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">06</div>
+      <div class="chapter-titles">
+        <span class="kicker">Not all the same river</span>
+        <h2>River Seoul<span class="kor">한강은 다 같은 한강이 아니다</span></h2>
+      </div>
+      <p class="chapter-intro">The Han River is loooong — like the Thames. You get a completely different mood depending on where along it you go. Most tourists default to Yeouido; here's how the stretches actually differ.</p>
+    </div>
+
+    <div class="hoods">
+      <article class="hood wide reveal">
+        <h3 class="hood-name">The Han, decoded<span class="en">한강, 결 나누기</span></h3>
+        <p class="hood-mood"><strong>Nodeul Island</strong> is a small island sitting between the bridges — usually a nice spot for performances, a bookshop and a sunset over the water, though parts are under construction right now, so check before you go. Whichever stretch you pick, the move is the same: grab food and watch the sun go down over the river. Each part of the Han has its own mood — choose the one that fits your evening.</p>
+        <div class="instead">
+          The move on a nice evening: order delivery food <em>to the park</em> (yes, you can), spread out on the grass, watch the sun go down over the water. Very Seoul.
+        </div>
+
+        <div class="places">
+          <span class="label">Pick your stretch</span>
+          <div class="parks">
+            <div class="park">
+              <h5>Nodeul <span class="kr">노들섬</span></h5>
+              <p>A small island between the bridges — performances, a bookshop, a lovely sunset. Partly under construction now, so check first.</p>
+            </div>
+            <div class="park">
+              <h5>Yeouido <span class="kr">여의도</span></h5>
+              <p>The big one. Wide riverside park, cherry blossoms in spring, the default picnic spot.</p>
+            </div>
+            <div class="park">
+              <h5>Mangwon <span class="kr">망원</span></h5>
+              <p>The west-side, local pick — grab food off Mangri-dan-gil or in Yeonnam and bring it down. Younger, neighbourhood feel.</p>
+            </div>
+            <div class="park">
+              <h5>Banpo <span class="kr">반포</span></h5>
+              <p>Rainbow fountain off the bridge at night, big lawns — the classic chicken-and-beer picnic.</p>
+            </div>
+            <div class="park">
+              <h5>Ttukseom <span class="kr">뚝섬</span></h5>
+              <p>By Seoul Forest &amp; Seongsu. Tent zones, runners, pools in summer — the active, younger stretch.</p>
+            </div>
+            <div class="park">
+              <h5>Ichon <span class="kr">이촌</span></h5>
+              <p>Quiet and local — a calm walking-and-running stretch with almost no tourists.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="places">
+          <span class="label">Spot — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/YEm11tX6ixyXnYBXA" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Nodeul Island <span class="note">— check ahead, partly under construction</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood wide reveal">
+        <h3 class="hood-name">Yeouido<span class="en">여의도</span></h3>
+        <p class="hood-mood">Korea's finance island — home to the major securities firms and the National Assembly, whose green-domed roof you'll spot from the main boulevard. Lately it's gone from all-business to genuinely lively: <strong>The Hyundai Seoul</strong> turned it into a retail destination, the aging office towers are being actively redeveloped, and more is coming (an opera house among them). It only gets better from here.</p>
+        <p class="hood-mood">There's a lot of green space too, so the rhythm flips with the week — finance crowds on weekdays, families coming out to play on weekends. The 63 Building now houses <strong>Centre Pompidou Hanwha</strong>, the French museum's first Korean outpost (opened June 2026), plus a revamped sky observatory; in spring, the cherry blossoms along Yunjung-ro are famous.</p>
+        <p class="hood-mood">Worth a stop at <strong>The Hyundai Seoul</strong>: the floor that connects to Yeouido Station is full of trendy brands and fun pop-ups, and the F&amp;B floor feels like someone gathered great little hole-in-the-wall restaurants from all over the city into one department store. Grab a dessert and coffee there and take it down to the river park for a picnic.</p>
+        <div class="places">
+          <span class="label">Spots — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/EBUT8egnBmX77hg18" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">The Hyundai Seoul <span class="note">— trendy brands, pop-ups &amp; a great food floor</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="https://maps.app.goo.gl/nQVxr76FRRK5WF5z7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Yeouido Hangang Park <span class="note">— Mulbit Plaza, for the picnic</span></span><span class="arrow-out">↗</span></a>
+          <a class="place-link" href="#" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Hanwha 63 Building <span class="note">— Centre Pompidou Hanwha + sky observatory (link coming)</span></span><span class="arrow-out">↗</span></a>
+        </div>
+        <div class="tip">
+          <span class="tag">Yejin's tip</span>
+          My own hidden favourite is the <strong>Saetgang Ecological Park</strong> under Saetgang Bridge — it's genuinely beautiful, and renting a bike to ride from here along the water to the other Han River parks is just the best. The bridges off Yeouido (Mapo, Seogang, Wonhyo, Hangang) are fun to cross too, on foot or by bus — you get the river and the skyline the whole way over.
+        </div>
+        <div class="places">
+          <span class="label">Hidden spot — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/t1ZvFbdbrXTvGgxeA" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Yeouido Saetgang Ecological Park <span class="note">— my hidden favourite</span></span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+    </div>
+
+    <div class="divider reveal"><span>End of Seoul · 7 nights</span></div>
+  </section>
+
+  <!-- 07 BUSAN -->
+  <section class="chapter sea">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">07</div>
+      <div class="chapter-titles">
+        <span class="kicker">Sea, hills &amp; seafood · 3 nights</span>
+        <h2>Busan<span class="kor">부산 — 바다와 언덕, 그리고 회</span></h2>
+      </div>
+      <p class="chapter-intro">KTX gets you here from Seoul in about 2.5 hours. A looser, sunnier, seaside counterpart to Seoul — beaches, a hillside art village, the country's biggest fish market, and a coastal train ride.</p>
+    </div>
+
+    <div class="hoods">
+      <article class="hood reveal">
+        <h3 class="hood-name">Arrival &amp; Gwangalli<span class="en">도착 · 광안리</span></h3>
+        <p class="hood-mood">Settle into your hotel neighbourhood and walk <strong>Jeonpo Café Street</strong>. In the evening, <strong>Gwangalli Beach</strong> — the bridge lights up and the bars line the sand.</p>
+        <div class="hood-do">
+          <span class="label">Do this</span>
+          <p>Café-hop in Jeonpo, then beachfront drinks at Gwangalli after dark.</p>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Gamcheon &amp; Jagalchi<span class="en">감천 · 자갈치</span></h3>
+        <p class="hood-mood">The postcard day. <strong>Gamcheon Culture Village</strong> tumbling down the hillside in pastel, then down to the water for the markets and the coast.</p>
+        <div class="hood-do">
+          <span class="label">Do this</span>
+          <p>Gamcheon Culture Village → BIFF Square for street food → Jagalchi fish market → Jeoryeong coastal trail → Huinnyeoul Culture Village along the cliffs.</p>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Haeundae &amp; Sky Capsule<span class="en">해운대 · 스카이캡슐</span></h3>
+        <p class="hood-mood"><strong>Haedong Yonggungsa</strong> — a rare temple right on the sea — then the <strong>Haeundae</strong> neighbourhood and beach. From Mipo Station, ride the Sky Capsule or the Blue Line train along the coast.</p>
+        <div class="hood-do">
+          <span class="label">Book ahead</span>
+          <p>The Sky Capsule sells out — book about 1 month in advance, ideally a sunset slot.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TOURIST CLASSICS -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">＊</div>
+      <div class="chapter-titles">
+        <span class="kicker">Honest takes on the famous ones</span>
+        <h2>Tourist Classics<span class="kor">정석 관광지 — 솔직하게</span></h2>
+      </div>
+      <p class="chapter-intro">Famous doesn't always mean bad. Here are the postcard spots, rated honestly — the ones worth it, and the ones you can happily skip. Whether they're worth a detour depends on how much time you have and whether it's your friend's first time in Korea.</p>
+    </div>
+
+    <div class="mini">
+      <article class="hood reveal">
+        <h3 class="hood-name">Namsan · N Seoul Tower<span class="en">남산 · 갈 만함</span></h3>
+        <p class="hood-mood">A classic, but a good one. The sunset over the city really is lovely, and you won't regret going up. The tower deck itself is fine — the nicer move is the rooftop cafés and bars right nearby. The fences up top are covered in "love locks" — couples leave one with the superstition that it means they'll never break up.</p>
+        <div class="hood-do">
+          <span class="label">Do this</span>
+          <p>Go for sunset, skip the deck queue, settle into a rooftop with a view instead.</p>
+        </div>
+        <div class="places">
+          <span class="label">Spot — Google Maps</span>
+          <a class="place-link" href="https://maps.app.goo.gl/QiNjQWhuFpKFoGjR7" target="_blank" rel="noopener"><span class="pin">◍</span><span class="nm">Rooftop near Namsan</span><span class="arrow-out">↗</span></a>
+        </div>
+      </article>
+
+      <article class="hood reveal">
+        <h3 class="hood-name">Myeongdong<span class="en">명동 · 스킵 가능</span></h3>
+        <p class="hood-mood">Top of every guidebook, but honestly Koreans don't really go here — it's cosmetics shops and tourist crowds. Not bad, just not where the city actually lives.</p>
+        <div class="instead">
+          If it's right by your hotel, take a quick look. <strong>For the evening, go to Euljiro instead</strong> — or Jongno 3-ga, or Hannam. That's where it gets good.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- DAY TRIPS -->
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">＊</div>
+      <div class="chapter-titles">
+        <span class="kicker">If you have a spare day</span>
+        <h2>Day Trips<span class="kor">서울에서 당일치기</span></h2>
+      </div>
+      <p class="chapter-intro">Optional add-ons from Seoul if the pace allows.</p>
+    </div>
+
+    <div class="mini">
+      <article class="hood reveal">
+        <h3 class="hood-name">DMZ<span class="en">반나절 · 종일</span></h3>
+        <p class="hood-mood">The border tour — sobering and unlike anything else. A full day once you factor in the meet-up, travel and checkpoints. Book the JSA tour <strong>6–8 weeks ahead</strong>, it fills up fast.</p>
+      </article>
+      <article class="hood reveal">
+        <h3 class="hood-name">Jeonju<span class="en">전주</span></h3>
+        <p class="hood-mood">Korea's hanok town and food capital — and closer than it sounds. By KTX it's only about 1.5–2 hours from Seoul, so it works as a day trip (similar total time to a DMZ tour), though it's lovely enough to stay a night if you can.</p>
+        <div class="hood-do">
+          <span class="label">Do this</span>
+          <p>Hanok Village, Gyeonggijeon Shrine, Jaman Mural Village, and Nambu Market for the food. Bibimbap was basically born here.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- APPENDIX -->
+  <div class="divider reveal"><span>Appendix · Want more tradition?</span></div>
+
+  <section class="chapter">
+    <div class="chapter-head reveal">
+      <div class="chapter-num">＋</div>
+      <div class="chapter-titles">
+        <span class="kicker">Optional traditional extension</span>
+        <h2>Gyeongju &amp; Andong<span class="kor">전통을 더 보고 싶다면 — 경주·안동</span></h2>
+      </div>
+      <p class="chapter-intro">Not part of the core 10 days. But if your friend wants the deeper, older Korea, Gyeongju and Andong are the real thing — ancient Silla and Confucian heritage. Gyeongju slots onto the Seoul→Busan line; Andong is an easy add for folk-village culture. Add a night or two.</p>
+    </div>
+
+    <div class="mini">
+      <article class="hood reveal">
+        <h3 class="hood-name">Gyeongju<span class="en">경주 · 약 1–2박</span></h3>
+        <p class="hood-mood">The ancient Silla capital — an open-air museum of royal tombs and temples. Easy train onward to Busan (~1h), so it fits between Seoul and the coast.</p>
+        <div class="hood-do">
+          <span class="label">Do this</span>
+          <p>Hwangnidan-gil, Daereungwon tombs, Cheomseongdae, Donggung Palace lit up at night. Then Bulguksa + Seokguram.</p>
+        </div>
+      </article>
+      <article class="hood reveal">
+        <h3 class="hood-name">Andong<span class="en">안동 · 약 1박</span></h3>
+        <p class="hood-mood">The home of Korean Confucian and folk tradition. The Hahoe Folk Village is a living village, not a museum set — real families still live in the hanok.</p>
+        <div class="hood-do">
+          <span class="label">Do this</span>
+          <p>Hahoe Folk Village (mask-dance performance on Wednesdays), the Mask Museum, and Andong's famous jjimdak (braised chicken).</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <footer class="outro">
+    <p class="mark reveal">For your trip</p>
+    <h3 class="reveal">This is the Seoul<br>I'd show a <span class="clay">friend.</span></h3>
+    <p class="credit reveal">Seoul &amp; Busan · a local's guide</p>
+  </footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const sibs = [...e.target.parentElement.children].filter(c => c.classList.contains('reveal'));
+        const idx = sibs.indexOf(e.target);
+        e.target.style.transitionDelay = (idx % 4) * 70 + 'ms';
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
